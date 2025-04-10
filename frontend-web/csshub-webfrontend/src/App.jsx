@@ -1,15 +1,19 @@
+
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import LandingPage from './pages/LandingPage'
 import UserPage from './pages/UserPage'
+// import AuthProvider from './pages/AuthProvider'
+import { AuthProvider } from './pages/AuthProvider'; // Corrected import for named export
 
 
 function App() {
   return (
-    <BrowserRouter>
 
+    <AuthProvider>
 
+      <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
@@ -18,6 +22,8 @@ function App() {
   
       </Routes>
     </BrowserRouter>
+  </AuthProvider>
+    
   )
 }
 
