@@ -4,6 +4,13 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import LandingPage from './pages/LandingPage'
 import UserPage from './pages/UserPage'
+import MerchPage from './pages/MerchPage'
+import EventPage from './pages/EventPage'
+
+
+
+
+
 // import AuthProvider from './pages/AuthProvider'
 import { AuthProvider } from './pages/AuthProvider'; // Corrected import for named export
 
@@ -19,6 +26,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/userpage" element={<UserPage />} />
+        <Route path="/merchpage" element={<MerchPage />} />
+        <Route path="/eventpage" element={<EventPage />} />
+
   
       </Routes>
     </BrowserRouter>
