@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Merchandise</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" /> <!-- Optional Bootstrap styling -->
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="mb-4">List of Merchandises</h1>
+    <a class="btn btn-secondary mb-3" href="/" role="button">Back to Home</a><br>
+    <a class="btn btn-primary mb-3" href="/merchandises/create">Add Merchandise</a>
+
+    <table class="table table-bordered">
+        <thead class="table-light">
+        <tr>
+            <th>Image</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        <tr th:each="merchandise : ${merchandises}">
+            <td>
+                <img th:src="@{/merchandises/image/{id}(id=${merchandise.id})}"
+                     alt="No Image"
+                     style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px;"/>
+            </td>
+            <td th:text="${merchandise.id}"></td>
+            <td th:text="${merchandise.name}"></td>
+            <td th:text="${merchandise.description}"></td>
+            <td th:text="${merchandise.price}"></td>
+            <td th:text="${merchandise.stock}"></td>
+            <td style="white-space: nowrap">
+                <a class="btn btn-primary btn-sm"
+                   th:href="@{/merchandises/edit(id=${merchandise.id})}">Edit</a>
+                <a class="btn btn-danger btn-sm"
+                   th:href="@{/merchandises/delete(id=${merchandise.id})}"
+                   onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
