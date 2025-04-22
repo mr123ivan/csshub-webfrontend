@@ -6,6 +6,7 @@ import LandingPage from './pages/LandingPage'
 import UserPage from './pages/UserPage'
 import MerchPage from './pages/MerchPage'
 import EventPage from './pages/EventPage'
+import EventDetailPage from './pages/EventDetailPage'
 
 
 
@@ -28,7 +29,7 @@ function App() {
         <Route path="/userpage" element={<UserPage />} />
         <Route path="/merchpage" element={<MerchPage />} />
         <Route path="/eventpage" element={<EventPage />} />
-
+        <Route path="/eventdetailpage" element={<EventDetailPage />} />
   
       </Routes>
     </BrowserRouter>
