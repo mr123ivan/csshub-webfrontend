@@ -22,8 +22,8 @@ import AdminUpcomingEvents from './Admin/AdminUpcomingEvents'
 import AdminDeletedEvents from './Admin/AdminDeletedEvents'
 import AdminMerch from './Admin/AdminMerch'
 import AdminDeletedMerch from './Admin/AdminDeletedMerch'
-
-
+import AdminAddEvent from './Admin/AdminAddEvent'
+import AdminAddMerch from './Admin/AdminAddMerch'
 // import AuthProvider from './pages/AuthProvider'
 import { AuthProvider } from './pages/AuthProvider'; // Corrected import for named export
 
@@ -60,6 +60,8 @@ function App() {
         <Route path="/admindeletedevents" element={<AdminDeletedEvents />} />
         <Route path="/adminmerch" element={<AdminMerch />} />
         <Route path="/admindeletedmerch" element={<AdminDeletedMerch />} />
+        <Route path="/adminaddevent" element={<AdminAddEvent />} />
+        <Route path="/adminaddmerch" element={<AdminAddMerch />} />
   
       </Routes>
     </BrowserRouter>
