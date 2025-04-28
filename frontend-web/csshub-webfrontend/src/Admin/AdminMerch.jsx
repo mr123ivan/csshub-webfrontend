@@ -45,11 +45,7 @@ const AdminMerch = () => {
                 Members
               </Link>
             </li>
-            <li>
-              <Link to="/admindeletedmembers" className="hover:underline">
-                Deleted Members
-              </Link>
-            </li>
+         
           </ul>
 
           <h2 className="font-semibold mb-4">Events</h2>
@@ -59,11 +55,6 @@ const AdminMerch = () => {
                 Upcoming Events
               </Link>
             </li>
-            <li>
-              <Link to="/admindeletedevents" className="hover:underline">
-                Deleted Events
-              </Link>
-            </li>
           </ul>
 
           <h2 className="font-semibold mb-4">Merchandise</h2>
@@ -71,11 +62,6 @@ const AdminMerch = () => {
             <li>
               <Link to="/adminmerch" className="hover:underline">
                 List of Merchandise
-              </Link>
-            </li>
-            <li>
-              <Link to="/admindeletedmerch" className="hover:underline">
-                Deleted Merchandise
               </Link>
             </li>
           </ul>
