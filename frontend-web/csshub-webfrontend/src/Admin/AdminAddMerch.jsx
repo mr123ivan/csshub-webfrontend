@@ -54,19 +54,16 @@ const AdminAddMerch = () => {
           <h2 className="font-semibold mb-4">Members</h2>
           <ul className="mb-6 space-y-2">
             <li><Link to="/adminmembers" className="hover:underline">Members</Link></li>
-            <li><Link to="/admindeletedmembers" className="hover:underline">Deleted Members</Link></li>
           </ul>
 
           <h2 className="font-semibold mb-4">Events</h2>
           <ul className="mb-6 space-y-2">
             <li><Link to="/adminupcomingevents" className="hover:underline">Upcoming Events</Link></li>
-            <li><Link to="/admindeletedevents" className="hover:underline">Deleted Events</Link></li>
           </ul>
 
           <h2 className="font-semibold mb-4">Merchandise</h2>
           <ul className="space-y-2">
             <li><Link to="/adminmerch" className="hover:underline">List of Merchandise</Link></li>
-            <li><Link to="/admindeletedmerch" className="hover:underline">Deleted Merchandise</Link></li>
           </ul>
         </div>
       </aside>
