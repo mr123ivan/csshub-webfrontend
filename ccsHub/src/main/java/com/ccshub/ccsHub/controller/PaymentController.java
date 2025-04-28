@@ -78,8 +78,7 @@ public class PaymentController {
             @RequestParam(required = false) Integer eventId,
             @RequestParam(required = false) Integer merchandiseId,
             @RequestParam(required = false) String dateFrom,
-            @RequestParam(required = false) String dateTo
-    ) {
+            @RequestParam(required = false) String dateTo) {
         List<Payment> payments = paymentRepo.searchPayments(status, userId, eventId, merchandiseId, dateFrom, dateTo);
         List<PaymentDto> dtos = payments.stream().map(payment -> {
             PaymentDto dto = new PaymentDto();

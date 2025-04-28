@@ -16,10 +16,12 @@ public class Admin {
     @Column(nullable = false)
     private String role;
 
+    @Column(nullable = false) // added a password column
+    private String password;
+
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User userId;
-
 
     public int getAdminId() {
         return admin_id;
@@ -51,5 +53,13 @@ public class Admin {
 
     public void setUserId(User userId) {
         this.userId = userId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

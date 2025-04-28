@@ -3,7 +3,7 @@ package com.ccshub.ccsHub.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="merchandises")
+@Table(name = "merchandise") // changed merchandises to merchandise as stated in supabase
 public class Merchandise {
 
     @Id
@@ -55,11 +55,11 @@ public class Merchandise {
     public void setStock(int stock) {
         this.stock = stock;
     }
-    
+
     public byte[] getImage() {
         return image;
     }
-    
+
     public void setImage(byte[] image) {
         this.image = image;
     }

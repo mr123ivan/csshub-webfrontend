@@ -1,9 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { CalendarCheck, Shirt } from 'lucide-react';
+
+import AdminLogout from './AdminLogout';
+import axios from 'axios'; // don't forget to install this with npm/yarn if you haven't
 
 const AdminAddMerch = () => {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [image, setImage] = useState(null);
+  const [stock, setStock] = useState('');
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('imageFile', image); // change 'image' to 'imageFile'
+    formData.append('stock', stock);
+
+
+    try {
+      const res = await axios.post('http://localhost:8080/api/merchandises/create', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      alert('Merch added successfully!');
+      console.log(res.data);
+    } catch (error) {
+      console.error('Failed to add merch:', error);
+      alert('Failed to add merch');
+    }
+  };
+
+
   return (
+
+
+   
     <div className="min-h-screen flex font-sans">
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r border-black p-6 text-black">
@@ -35,57 +73,83 @@ const AdminAddMerch = () => {
 
       {/* Main Content */}
       <main className="flex-1 bg-white">
+      <AdminLogout/>
         <header className="bg-black text-yellow-500 text-center py-4 shadow-md">
           <h1 className="text-2xl font-bold">Computer Students Society</h1>
         </header>
-
         <section className="p-6">
- 
+  <form
+    onSubmit={handleSubmit}
+    className="bg-yellow-100 p-8 rounded-2xl shadow-md max-w-2xl mx-auto mt-10 space-y-6"
+  >
+    <h2 className="text-2xl font-bold text-gray-800">Add Merchandise</h2>
 
-        <section className="bg-yellow-100 p-8 rounded-2xl shadow-md max-w-2xl mx-auto mt-10 space-y-6">
-  <h2 className="text-2xl font-bold text-gray-800">Add Merchandise</h2>
+    <div>
+      <label className="block text-gray-700 mb-2">Name of merch</label>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="w-full border border-gray-300 rounded-lg p-3"
+        placeholder="Enter merch name"
+      />
+    </div>
 
-  {/* Text Input */}
-  <div>
-    <label className="block text-gray-700 mb-2">Name of merch</label>
-    <input 
-      type="text" 
-      placeholder="Enter your name" 
-      className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-    />
-  </div>
+    <div>
+      <label className="block text-gray-700 mb-2">Merch Description</label>
+      <input
+        type="text"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        className="w-full border border-gray-300 rounded-lg p-3"
+        placeholder="Enter merch description"
+      />
+    </div>
 
-  {/* Merch price */}
-  <div>
-    <label className="block text-gray-700 mb-2">Price</label>
-    <input 
-      type="text" 
-      placeholder="Enter your name" 
-      className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-    />
-  </div>
+    <div>
+      <label className="block text-gray-700 mb-2">Price</label>
+      <input
+        type="text"
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+        className="w-full border border-gray-300 rounded-lg p-3"
+        placeholder="Enter merch price"
+      />
+    </div>
 
-  
+    {/* 🔢 Stock Input */}
+    <div>
+      <label className="block text-gray-700 mb-2">Stock Available</label>
+      <input
+        type="number"
+        value={stock}
+        onChange={(e) => setStock(e.target.value)}
+        className="w-full border border-gray-300 rounded-lg p-3"
+        placeholder="Enter stock quantity"
+        min="0"
+      />
+    </div>
 
-  {/* Upload File */}
-  <div>
-    <label className="block text-gray-700 mb-2">Upload merch design</label>
-    <input 
-      type="file" 
-      className="w-full text-gray-600 bg-white border border-gray-300 rounded-lg p-2 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-yellow-400 file:text-black hover:file:bg-yellow-500"
-    />
-  </div>
+    <div>
+      <label className="block text-gray-700 mb-2">Upload merch design</label>
+      <input
+        type="file"
+        onChange={(e) => setImage(e.target.files[0])}
+        className="w-full border border-gray-300 rounded-lg p-2"
+      />
+    </div>
 
-  {/* Submit Button */}
-  <button className="w-full bg-yellow-400 text-black py-3 rounded-lg font-semibold hover:bg-yellow-500 transition">
-    Submit
-  </button>
+    <button
+      type="submit"
+      className="w-full bg-yellow-400 text-black py-3 rounded-lg font-semibold hover:bg-yellow-500 transition"
+    >
+      Submit
+    </button>
+  </form>
 </section>
-
-
-        </section>
       </main>
     </div>
+
   );
 };
 

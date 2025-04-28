@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -24,17 +25,23 @@ public class EventController {
         return ResponseEntity.ok(events);
     }
 
-
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> createEvent(
-            @RequestPart("event") EventDto eventDto,
-            @RequestPart(value = "imageFile", required = false) MultipartFile imageFile
-    ) {
+            @RequestParam("title") String title,
+            @RequestParam("description") String description,
+            @RequestParam("eventDate") String eventDateStr,
+            @RequestParam("location") String location,
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
+
         Event event = new Event();
-        event.setTitle(eventDto.getTitle());
-        event.setDescription(eventDto.getDescription());
-        event.setEventDate(eventDto.getEventDate());
-        event.setLocation(eventDto.getLocation());
+        event.setTitle(title);
+        event.setDescription(description);
+
+        // Convert string to LocalDate
+        LocalDate eventDate = LocalDate.parse(eventDateStr);
+        event.setEventDate(eventDate);
+
+        event.setLocation(location);
 
         try {
             if (imageFile != null && !imageFile.isEmpty()) {
@@ -58,7 +65,7 @@ public class EventController {
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(event.getImage());
     }
 
-    @GetMapping("/{eventId}")
+    @GetMapping("/edit/{eventId}")
     public ResponseEntity<Event> getEvent(@PathVariable int eventId) {
         Event event = repo.getEvent(eventId);
         return event != null ? ResponseEntity.ok(event) : ResponseEntity.notFound().build();
@@ -67,18 +74,25 @@ public class EventController {
     @PutMapping(value = "/{eventId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> updateEvent(
             @PathVariable int eventId,
-            @RequestPart("event") EventDto eventDto,
-            @RequestPart(value = "imageFile", required = false) MultipartFile imageFile
-    ) {
+            @RequestParam("title") String title,
+            @RequestParam("description") String description,
+            @RequestParam("eventDate") String eventDateStr,
+            @RequestParam("location") String location,
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
+
         Event event = repo.getEvent(eventId);
         if (event == null) {
             return ResponseEntity.notFound().build();
         }
 
-        event.setTitle(eventDto.getTitle());
-        event.setDescription(eventDto.getDescription());
-        event.setEventDate(eventDto.getEventDate());
-        event.setLocation(eventDto.getLocation());
+        event.setTitle(title);
+        event.setDescription(description);
+
+        // Convert string to LocalDate
+        LocalDate eventDate = LocalDate.parse(eventDateStr);
+        event.setEventDate(eventDate);
+
+        event.setLocation(location);
 
         try {
             if (imageFile != null && !imageFile.isEmpty()) {

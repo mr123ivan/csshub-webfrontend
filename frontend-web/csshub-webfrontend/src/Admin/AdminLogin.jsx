@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -8,15 +9,32 @@ const AdminLogin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Example hardcoded authentication (replace with real backend logic)
-    if (username === "admin" && password === "password123") {
-      // Navigate to admin dashboard or protected route
-      navigate("/admin-dashboard");
-    } else {
-      setError("Invalid username or password");
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/admins/login",
+        {
+          username,
+          password,
+        },
+        {
+          withCredentials: true, // 🔥 IMPORTANT: send cookies/session
+        }
+      );
+
+      if (response.status === 200) {
+        localStorage.setItem("isAdminAuthenticated", "true");
+        navigate("/adminmain");
+      } else {
+        setError("Invalid username or password");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError(
+        error.response?.data || "An error occurred while trying to log in."
+      );
     }
   };
 
@@ -35,14 +53,12 @@ const AdminLogin = () => {
           <FaArrowLeft className="absolute top-5 left-5 text-2xl cursor-pointer hover:text-yellow-400" />
         </Link>
 
-        {/* Header */}
         <h1 className="text-3xl font-semibold mb-5 font-serif text-center">
-          Welcome to Computer Student Society Hub Admin
+          Welcome to CSS Hub Admin
         </h1>
 
         <span className="text-black font-medium mb-4">Login with your credentials</span>
 
-        {/* Login Form */}
         <form onSubmit={handleLogin} className="flex flex-col w-3/4 gap-4">
           <input
             type="text"
@@ -60,16 +76,14 @@ const AdminLogin = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          {error && <span className="text-red-600">{error}</span>}
+          {error && <span className="text-red-600 text-sm">{error}</span>}
           <button
             type="submit"
-            className="bg-black text-white py-2 px-6 rounded-lg hover:bg-gray-800"
+            className="bg-black text-white py-2 px-6 rounded-lg hover:bg-gray-800 transition duration-200"
           >
             Log In
           </button>
         </form>
-
-       
       </div>
     </div>
   );

@@ -42,6 +42,7 @@ public class AdminController {
         Admin admin = new Admin();
         admin.setUsername(adminDto.getUsername());
         admin.setRole(adminDto.getRole());
+        admin.setPassword(adminDto.getPassword());
 
         User user = userRepo.getUserById(adminDto.getUserId());
         if (user == null) {
@@ -63,6 +64,7 @@ public class AdminController {
 
         admin.setUsername(adminDto.getUsername());
         admin.setRole(adminDto.getRole());
+        admin.setPassword(adminDto.getPassword());
 
         User user = userRepo.getUserById(adminDto.getUserId());
         if (user == null) {
@@ -82,6 +84,25 @@ public class AdminController {
             return new ResponseEntity<>("Admin not found", HttpStatus.NOT_FOUND); // Return 404 if admin not found
         }
         adminRepo.deleteAdmin(id);
-        return new ResponseEntity<>("Admin deleted successfully", HttpStatus.NO_CONTENT); // Return 204 for successful delete
+        // return new ResponseEntity<>("Admin deleted successfully",
+        // HttpStatus.NO_CONTENT); // Return 204 for successful
+        // delete
+
+        return new ResponseEntity<>("Admin deleted successfully", HttpStatus.OK); // Return 200 for successful delete
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody AdminDto loginDto) {
+        List<Admin> admins = adminRepo.getAllAdmins();
+
+        for (Admin admin : admins) {
+            if (admin.getUsername().equals(loginDto.getUsername()) &&
+                    admin.getPassword().equals(loginDto.getPassword())) {
+                return new ResponseEntity<>("Login successful", HttpStatus.OK);
+            }
+        }
+
+        return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
+    }
+
 }

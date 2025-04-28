@@ -15,7 +15,7 @@ export const msalConfig = {
     auth: {
         clientId: '67761468-57d5-41a3-9b4f-1f69101be135', // This is the ONLY mandatory field that you need to supply.
         authority: 'https://login.microsoftonline.com/823cde44-4433-456d-b801-bdf0ab3d41fc', // Replace the placeholder with your tenant subdomain 
-        redirectUri: 'https://ccshub-systeminteg.azurewebsites.net/login/oauth2/code/azure-dev', // Points to window.location.origin. You must register this URI on Microsoft Entra admin center/App Registration.
+        redirectUri: 'http://localhost:8080/login/oauth2/code/azure-dev', // Points to window.location.origin. You must register this URI on Microsoft Entra admin center/App Registration.
         postLogoutRedirectUri: '/', // Indicates the page to navigate after logout.
         navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
     },

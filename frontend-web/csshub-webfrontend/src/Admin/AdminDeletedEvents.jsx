@@ -1,8 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import AdminLogout from './AdminLogout';
 const AdminDeletedEvents = () => {
+ 
+  const navigate = useNavigate();
   return (
+
+
+
+
+    
     <div className="min-h-screen flex font-sans">
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r border-black p-6 text-black">
@@ -58,22 +65,31 @@ const AdminDeletedEvents = () => {
 
       {/* Main Content */}
       <main className="flex-1 bg-white">
-        <header className="bg-black text-yellow-500 text-center py-4 shadow-md">
+      <AdminLogout/>
+        <header className="bg-black text-yellow-500 text-center py-4 shadow-md flex justify-between items-center">
           <h1 className="text-2xl font-bold">Computer Students Society</h1>
+      
         </header>
 
         <section className="p-6">
           {/* Dashboard Buttons */}
           <div className="flex gap-6 mb-8">
-            <button className="flex flex-col items-center justify-center w-48 h-32 bg-yellow-500 rounded-lg shadow hover:bg-yellow-600">
-              <div className="w-10 h-10 mb-2" /> {/* Placeholder for an icon */}
-              <span className="font-semibold text-black">Add Event</span>
-            </button>
-            <button className="flex flex-col items-center justify-center w-48 h-32 bg-yellow-500 rounded-lg shadow hover:bg-yellow-600">
-              <div className="w-10 h-10 mb-2" /> {/* Placeholder for an icon */}
-              <span className="font-semibold text-black">Add Merch</span>
-            </button>
-          </div>
+      <button
+        onClick={() => navigate("/adminaddevent")}
+        className="flex flex-col items-center justify-center w-48 h-32 bg-yellow-500 rounded-lg shadow hover:bg-yellow-600"
+      >
+        <div className="w-10 h-10 mb-2" /> {/* Placeholder for an icon */}
+        <span className="font-semibold text-black">Add Event</span>
+      </button>
+
+      <button
+        onClick={() => navigate("/adminaddmerch")}
+        className="flex flex-col items-center justify-center w-48 h-32 bg-yellow-500 rounded-lg shadow hover:bg-yellow-600"
+      >
+        <div className="w-10 h-10 mb-2" /> {/* Placeholder for an icon */}
+        <span className="font-semibold text-black">Add Merch</span>
+      </button>
+    </div>
 
           <div className="mt-8 bg-black text-white rounded-lg p-6">
             <h2 className="text-lg font-bold">LIST OF DELETED EVENTS</h2>
@@ -100,6 +116,7 @@ const AdminDeletedEvents = () => {
         </section>
       </main>
     </div>
+ 
   );
 };
 

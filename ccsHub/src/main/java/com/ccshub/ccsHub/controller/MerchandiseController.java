@@ -27,17 +27,20 @@ public class MerchandiseController {
 
     @PostMapping("/create")
     public ResponseEntity<Merchandise> createMerchandise(
-            @RequestBody MerchandiseDto merchandiseDto,
-            @RequestParam("imageFile") MultipartFile imageFile) {
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("price") double price,
+            @RequestParam("stock") int stock,
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
 
         Merchandise merchandise = new Merchandise();
-        merchandise.setName(merchandiseDto.getName());
-        merchandise.setDescription(merchandiseDto.getDescription());
-        merchandise.setPrice(merchandiseDto.getPrice());
-        merchandise.setStock(merchandiseDto.getStock());
+        merchandise.setName(name);
+        merchandise.setDescription(description);
+        merchandise.setPrice(price);
+        merchandise.setStock(stock);
 
         try {
-            if (!imageFile.isEmpty()) {
+            if (imageFile != null && !imageFile.isEmpty()) {
                 merchandise.setImage(imageFile.getBytes());
             }
         } catch (Exception e) {
@@ -58,21 +61,24 @@ public class MerchandiseController {
     @PutMapping("/edit/{id}")
     public ResponseEntity<Merchandise> updateMerchandise(
             @PathVariable int id,
-            @RequestBody MerchandiseDto merchandiseDto,
-            @RequestParam("imageFile") MultipartFile imageFile) {
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("price") double price,
+            @RequestParam("stock") int stock,
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
 
         Merchandise merchandise = repo.getMerchandise(id);
         if (merchandise == null) {
             return ResponseEntity.notFound().build();
         }
 
-        merchandise.setName(merchandiseDto.getName());
-        merchandise.setDescription(merchandiseDto.getDescription());
-        merchandise.setPrice(merchandiseDto.getPrice());
-        merchandise.setStock(merchandiseDto.getStock());
+        merchandise.setName(name);
+        merchandise.setDescription(description);
+        merchandise.setPrice(price);
+        merchandise.setStock(stock);
 
         try {
-            if (!imageFile.isEmpty()) {
+            if (imageFile != null && !imageFile.isEmpty()) {
                 merchandise.setImage(imageFile.getBytes());
             }
         } catch (Exception e) {

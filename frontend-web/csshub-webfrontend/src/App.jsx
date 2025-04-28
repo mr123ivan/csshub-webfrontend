@@ -1,5 +1,8 @@
 
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import ProtectedRoute from './pages/ProtectedRoute'
+import AdminProtectedRoute from './Admin/AdminProtectedRoute'
+
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import LandingPage from './pages/LandingPage'
@@ -53,14 +56,14 @@ function App() {
 
         {/* //admin side */}
         <Route path="/adminlogin" element={<AdminLogin />} />
-        <Route path="/adminmain" element={<AdminMain />} />
-        <Route path="/adminmembers" element={<AdminMembers />} />
-        <Route path="/admindeletedmembers" element={<AdminDeletedMembers />} />
-        <Route path="/adminupcomingevents" element={<AdminUpcomingEvents />} />
-        <Route path="/admindeletedevents" element={<AdminDeletedEvents />} />
+        <Route path="/adminmain" element={<AdminProtectedRoute><AdminMain /></AdminProtectedRoute>} />
+        <Route path="/adminmembers" element={<AdminProtectedRoute><AdminMembers /></AdminProtectedRoute>} />
+        <Route path="/admindeletedmembers" element={<AdminProtectedRoute><AdminDeletedMembers /></AdminProtectedRoute>} />
+        <Route path="/adminupcomingevents" element={<AdminProtectedRoute><AdminUpcomingEvents /></AdminProtectedRoute>} />
+        <Route path="/admindeletedevents" element={<AdminProtectedRoute><AdminDeletedEvents /></AdminProtectedRoute>} />
         <Route path="/adminmerch" element={<AdminMerch />} />
-        <Route path="/admindeletedmerch" element={<AdminDeletedMerch />} />
-        <Route path="/adminaddevent" element={<AdminAddEvent />} />
+        <Route path="/admindeletedmerch" element={<AdminProtectedRoute><AdminDeletedMerch /></AdminProtectedRoute>} />
+        <Route path="/adminaddevent" element={<AdminProtectedRoute><AdminAddEvent /></AdminProtectedRoute>} />
         <Route path="/adminaddmerch" element={<AdminAddMerch />} />
   
       </Routes>

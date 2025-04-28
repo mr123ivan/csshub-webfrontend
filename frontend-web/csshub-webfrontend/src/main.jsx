@@ -1,20 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
-import './index.css';  // or './app.css' depending on your setup
-import {useAuthProvider } from './pages/AuthProvider';
-
-
-const {AuthProvider} = useAuthProvider();
+import './index.css';
+import { AuthProvider } from './pages/AuthProvider'; // ✅ just import it directly
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-        <App />
+      <App />
     </AuthProvider>
-   
-  </React.StrictMode>,
-)
-
-
+  </React.StrictMode>
+);
