@@ -8,7 +8,7 @@ const AdminMerch = () => {
   const [merchList, setMerchList] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/merchandises') // Replace with your actual backend URL
+    axios.get('https://ccshub-systeminteg.azurewebsites.net/api/merchandises') // Replace with your actual backend URL
       .then(res => setMerchList(res.data))
       .catch(err => console.error('Error fetching merch:', err));
   }, []);
@@ -17,7 +17,7 @@ const AdminMerch = () => {
     if (window.confirm('Are you sure you want to delete this merchandise item?')) {
       try {
         // Ensure URL matches the DELETE endpoint
-        const response = await axios.delete(`http://localhost:8080/api/merchandises/delete/${itemId}`);
+        const response = await axios.delete(`https://ccshub-systeminteg.azurewebsites.net/api/merchandises/delete/${itemId}`);
         if (response.status === 204) { // No Content status code when deleted successfully
           setMerchList(merchList.filter(item => item.id !== itemId)); // Remove the deleted item from state
         }
@@ -94,7 +94,7 @@ const AdminMerch = () => {
               {merchList.map((item) => (
                 <div key={item.id} className="bg-yellow-500 text-black rounded p-4 flex items-start gap-4">
                   <img
-                    src={`http://localhost:8080/api/merchandises/image/${item.id}`}
+                    src={`https://ccshub-systeminteg.azurewebsites.net/api/merchandises/image/${item.id}`}
                     alt={item.name}
                     className="w-16 h-16 object-cover rounded"
                   />

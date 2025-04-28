@@ -13,7 +13,7 @@ const AdminMembers = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/users'); // Adjust if your endpoint is different
+      const response = await axios.get('https://ccshub-systeminteg.azurewebsites.net/api/users'); // Adjust if your endpoint is different
       setUsers(response.data);
     } catch (error) {
       console.error("There was an error fetching the users!", error);
@@ -23,7 +23,7 @@ const AdminMembers = () => {
   const handleDelete = async (userId) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       try {
-        await axios.delete(`http://localhost:8080/api/users/${userId}`); // Assuming DELETE /api/users/:id
+        await axios.delete(`https://ccshub-systeminteg.azurewebsites.net/api/users/${userId}`); // Assuming DELETE /api/users/:id
         setUsers(users.filter(user => user.userId !== userId)); // Remove deleted user from state
       } catch (error) {
         console.error('Error deleting user:', error);

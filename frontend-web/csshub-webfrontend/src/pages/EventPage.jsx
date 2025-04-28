@@ -14,7 +14,7 @@
     const fetchEvents = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('http://localhost:8080/api/events'); // Replace with your API URL
+        const response = await axios.get('https://ccshub-systeminteg.azurewebsites.net/api/events'); // Replace with your API URL
         setEvents(response.data);
       } catch (error) {
         console.error('Error fetching events:', error);
@@ -89,7 +89,7 @@
       className="bg-white rounded-lg shadow p-4 flex gap-4 cursor-pointer hover:bg-gray-100 transition"
     >
       <img
-        src={`http://localhost:8080/api/events/image/${event.eventId}`} // ✅
+        src={`https://ccshub-systeminteg.azurewebsites.net/api/events/image/${event.eventId}`} // ✅
         alt={event.title}
         className="w-24 h-24 object-cover rounded-md"
       />

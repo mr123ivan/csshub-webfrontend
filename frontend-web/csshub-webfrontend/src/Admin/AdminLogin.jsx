@@ -14,7 +14,7 @@ const AdminLogin = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/admins/login",
+        "https://ccshub-systeminteg.azurewebsites.net/api/admins/login",
         {
           username,
           password,

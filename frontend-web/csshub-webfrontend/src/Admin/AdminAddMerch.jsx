@@ -24,7 +24,7 @@ const AdminAddMerch = () => {
 
 
     try {
-      const res = await axios.post('http://localhost:8080/api/merchandises/create', formData, {
+      const res = await axios.post('https://ccshub-systeminteg.azurewebsites.net/api/merchandises/create', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

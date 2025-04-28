@@ -9,7 +9,7 @@ const AdminUpcomingEvents = () => {
 
   useEffect(() => {
     // Fetch events data from the backend
-    axios.get('http://localhost:8080/api/events') // Replace with the actual API URL for upcoming events
+    axios.get('https://ccshub-systeminteg.azurewebsites.net/api/events') // Replace with the actual API URL for upcoming events
       .then(res => setEventsList(res.data))  // Save the data into state
       .catch(err => console.error('Error fetching events:', err));
   }, []); // Empty dependency array to fetch data only once when the component mounts
@@ -17,7 +17,7 @@ const AdminUpcomingEvents = () => {
   const handleDelete = async (eventId) => {
     if (window.confirm('Are you sure you want to delete this event?')) {
       try {
-        await axios.delete(`http://localhost:8080/api/events/${eventId}`); // Assuming DELETE /api/events/:id
+        await axios.delete(`https://ccshub-systeminteg.azurewebsites.net/api/events/${eventId}`); // Assuming DELETE /api/events/:id
         setEventsList(eventsList.filter(event => event.eventId !== eventId)); // Remove deleted event from state
       } catch (error) {
         console.error('Error deleting event:', error);
@@ -83,7 +83,7 @@ const AdminUpcomingEvents = () => {
                 <div key={event.eventId} className="bg-yellow-500 text-black rounded p-4 flex items-start gap-4">
                   <div className="w-16 h-16 bg-gray-300 rounded">
                     <img
-                      src={`http://localhost:8080/api/events/image/${event.eventId}`} // ✅
+                      src={`https://ccshub-systeminteg.azurewebsites.net/api/events/image/${event.eventId}`} // ✅
                       alt={event.title}
                       className="w-24 h-24 object-cover rounded-md"
                     />
