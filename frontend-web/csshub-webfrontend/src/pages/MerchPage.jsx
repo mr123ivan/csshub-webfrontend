@@ -15,7 +15,7 @@ const MerchPage = () => {
   const fetchMerchandise = async (keyword = '') => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:8080/api/merchandises', {
+      const response = await axios.get('https://ccshub-systeminteg.azurewebsites.net/api/merchandises', {
         params: { keyword },
       });
       setMerchList(response.data);
@@ -111,7 +111,7 @@ const MerchPage = () => {
                 merchList.map((item) => (
                   <div key={item.id} className="bg-yellow-500 text-black rounded p-4 flex items-start gap-4">
                     <img
-                      src={`http://localhost:8080/api/merchandises/image/${item.id}`}
+                      src={`https://ccshub-systeminteg.azurewebsites.net/api/merchandises/image/${item.id}`}
                       alt={item.name}
                       className="w-16 h-16 object-cover rounded"
                     />
